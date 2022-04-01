@@ -6,9 +6,9 @@
 
     <changeSet id="my-movie-init" author="fbiville">
         <comment>Creates a forgettable movie</comment>
-        <insert tableName="Person">
+        <neo4j:insert labelName="Person">
             <column name="firstName" value="Florent" />
             <column name="lastName" value="Biville" />
-        </insert>
+        </neo4j:insert>
     </changeSet>
 </databaseChangeLog>
