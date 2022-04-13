@@ -1,0 +1,34 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.liquibase.org/xml/ns/neo4j"
+            xmlns="http://www.liquibase.org/xml/ns/neo4j"
+            xmlns:core="http://www.liquibase.org/xml/ns/dbchangelog"
+            elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.liquibase.org/xml/ns/dbchangelog"
+                schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd"/>
+
+    <xsd:element name="cypher" substitutionGroup="core:sql"/>
+    <xsd:element name="cypherCheck" substitutionGroup="core:sqlCheck"/>
+
+    <xsd:element name="edition">
+        <xsd:complexType>
+            <xsd:attribute name="enterprise" type="xsd:boolean" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="version">
+        <xsd:complexType>
+            <xsd:attribute name="matches" type="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:redefine schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+        <xsd:group name="baseGroup">
+            <xsd:choice>
+                <xsd:group ref="core:PreConditionChildren"/>
+                <xsd:element ref="edition" maxOccurs="unbounded"/>
+                <xsd:element ref="version" maxOccurs="unbounded"/>
+            </xsd:choice>
+        </xsd:group>
+    </xsd:redefine>
+</xsd:schema>
